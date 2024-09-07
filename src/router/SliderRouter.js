@@ -5,6 +5,6 @@ const SliderRouter = express.Router()
 
 SliderRouter.post("/AddSlider",upload.single("image"),AddSlider);
 SliderRouter.get("/getAllSlider",getAllSlider);
-
+SliderRouter.delete('',getAllSlider);
 module.exports = SliderRouter
 
