@@ -17,7 +17,7 @@ const ProductsSchema = mongoose.Schema({
     ProductInstock:{type:Boolean},
     ProductCatId:{type:String},
     ProductSubCatId:{type:String},
-    ProductDescripton:{type:String},
+    ProductDescription:{type:String},
     ProductTitle:{type:String},
     ProductImage:{type:String,default:".png"}
    

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const SubCategoryModel = require('../model/SubCategoryModel')
 exports.addSubCategory = async function(req,res,next){
-   
     try{
         const subcatData = {
             catsubcatTitle: req.body.catsubcatTitle,
@@ -17,6 +16,7 @@ exports.addSubCategory = async function(req,res,next){
                 data:resData
             })
         }
+
         else {
             res.json({  
                 status: "failed",
@@ -46,7 +46,7 @@ exports.getAllSubCategory = async function(req,res,next){
         })
     }else{
         res.json({
-            status:"failed",
+        status:"failed",
         message:"unable to find  your data"
         })
     }
@@ -72,6 +72,7 @@ exports.updateSubCategory = async function(req,res,next){
                 status: "success",
                 message: "SubCategory update succesfully"
             })
+
         }
         else {
             res.json({

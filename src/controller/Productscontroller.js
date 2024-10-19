@@ -8,7 +8,7 @@ exports.addProduct = async function (req, res, next) {
     const ProductData = {
         ProductName: req.body.ProductName,
         ProductPrice: req.body.ProductPrice,
-        ProductCurrancy: req.body.ProductCurrancy,
+        ProductCurrancy: req.body.ProductCurrency,
         ProductUnit: req.body.ProductUnit,
         ProductRating: req.body.ProductRating,
         ProductFeedback: req.body.ProductFeedback,
@@ -16,7 +16,7 @@ exports.addProduct = async function (req, res, next) {
         ProductInstock: req.body.ProductInstock,
         ProductCatId: req.body.ProductCatId,
         ProductSubCatId: req.body.ProductSubCatId,
-        ProductDescripton: req.body.ProductDescripton,
+        ProductDescription: req.body.ProductDescription,
         ProductTitle: req.body.ProductTitle,
         ProductImage:req.imagePath
     };
@@ -56,7 +56,7 @@ exports.addProduct = async function (req, res, next) {
 exports.getAllProduct = async function (req, res, next) {
     try {
          const pageNo = req.query.pageno
-         console.log(pageNo)
+        //  console.log(pageNo)
          const limit = 5;
         const totalCount = await ProductsModel.find({})
         const totalLenght = totalCount.length
@@ -64,12 +64,12 @@ exports.getAllProduct = async function (req, res, next) {
         if(pageNo <= pages){
             const offset = (pageNo - 1) *limit;
             const resData = await ProductsModel.find({}).skip(offset).limit(limit)
+            console.log(resData)
             if (resData) {
                 res.json({
                     status: "success",
                     message: "get all products",
                     data: resData
-    
                 })
             }
             else {
@@ -158,13 +158,14 @@ exports.updateProduct = async function (req, res, next) {
 exports.getSingleProduct = async function (req, res, next) {
     try {
         const query = { _id: req.params.id }
-        const resData = await ProductsModel.findOne(query)
+        // console.log(query)
+        const resData = await ProductsModel.findOne({ProductTitle:query._id})
+        // console.log(resData)
         if (resData) {
             res.json({
                 status: "success",
                 message: "updated products",
-
-
+                data:resData
             })
         }
         else {
@@ -172,10 +173,7 @@ exports.getSingleProduct = async function (req, res, next) {
                 status: "failed",
                 message: "something went wrong verify your data"
             })
-
         }
-
-
     }
     catch (error) {
         res.json({
@@ -184,7 +182,6 @@ exports.getSingleProduct = async function (req, res, next) {
 
         })
     }
-
 }
 
 
@@ -235,6 +232,7 @@ exports.uploadProductImages = async function(req, res, next) {
         };
 
         const resData = await ImageModel.create(uploadImage);
+        console.log(resData);
 
         if (resData) {
             res.status(201).json({

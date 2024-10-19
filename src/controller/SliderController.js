@@ -40,9 +40,8 @@ exports.getAllSlider = async function (req,res,next){
             res.json({
                 status:"success",
                 message:"slider find successfully",
-                
+                data:getSlider
             })
-
         }
         else{
             res.json({
@@ -51,7 +50,6 @@ exports.getAllSlider = async function (req,res,next){
             })
 
         }
-
     }
     catch(error){
         res.json({
@@ -76,21 +74,17 @@ exports.deleteSlider = async function(req,res,next){
                 message: "delete products"
             })
         }
-
         else{
             res.json({
                 status: "failed",
                 message: "something went wrong verify your data"
             })
         }
-
     }
     catch(error){
         res.json({
             status: "failed",
             message: "something went wrong"
-
         })
-
     }
 }
